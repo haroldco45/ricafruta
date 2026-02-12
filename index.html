@@ -3,38 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helados Rica Fruta - Menú Completo</title>
+    <title>Helados Rica Fruta - Pedidos Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .product-card { border-radius: 1rem; transition: 0.2s; border: 1px solid #fce7f3; }
-        .category-header { background: #f472b6; color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; margin-top: 20px; display: inline-block; }
+        .category-header { background: #f472b6; color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; margin-top: 25px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .bg-pink-soft { background-color: #fdf2f8; }
     </style>
 </head>
-<body class="bg-pink-50 pb-40">
+<body class="bg-pink-soft pb-40">
 
     <header class="bg-white p-6 text-center shadow-md sticky top-0 z-50">
-        <img src="rica-fruta1.PNG" alt="Logo Rica Fruta" class="mx-auto h-32 mb-2">
-        <h1 class="text-xl font-black text-pink-600 uppercase">Domicilios: 3137220124</h1>
+        <img src="rica-fruta1.PNG" alt="Logo Rica Fruta" class="mx-auto h-32 mb-2" onerror="this.src='https://via.placeholder.com/200x150?text=RICA+FRUTA'">
+        <h1 class="text-xl font-black text-pink-600 uppercase italic">Domicilios: 3137220124</h1>
         <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Caucasia - B. El Triángulo</p>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-4">
 
-        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest italic">Información de Entrega</h2>
-            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
-            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
-            <input type="tel" id="telefono" placeholder="Celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3 border-l-4 border-pink-400">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest italic">Datos de Envío</h2>
+            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
+            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
+            <input type="tel" id="telefono" placeholder="Número de Celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
         </section>
 
-        <div id="menu-full"></div>
+        <div id="menu-completo"></div>
 
         <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
-            <textarea id="observaciones" placeholder="¿Alguna nota? (ej: helado de mora, sin cebolla...)" class="w-full p-3 bg-gray-50 rounded-xl border-none h-20 text-sm"></textarea>
-            <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none font-bold text-gray-700">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Detalles Adicionales</h2>
+            <textarea id="observaciones" placeholder="Ej: Sabores de helado, instrucciones de entrega..." class="w-full p-3 bg-gray-50 rounded-xl border-none h-24 text-sm focus:ring-2 focus:ring-pink-300"></textarea>
+            
+            <label class="text-[10px] font-bold text-gray-400 uppercase">Forma de Pago</label>
+            <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none font-bold text-gray-600">
                 <option value="Efectivo">Efectivo</option>
-                <option value="Transferencia">Transferencia Nequi/Bancolombia</option>
+                <option value="Transferencia (Nequi/Bancolombia)">Transferencia</option>
+                <option value="Datáfono">Datáfono</option>
             </select>
         </section>
 
@@ -46,14 +51,18 @@
                 <p class="text-[10px] uppercase font-bold text-gray-400">Total a Pagar</p>
                 <p id="totalDisplay" class="text-3xl font-black text-pink-600">$0</p>
             </div>
-            <button onclick="enviarWhatsApp()" class="bg-green-500 text-white px-8 py-4 rounded-2xl font-bold shadow-lg active:scale-95 transition-transform">
-                PEDIR AHORA
+            <button onclick="enviarWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-2 active:scale-95 transition-all">
+                <i class="fab fa-whatsapp text-xl"></i> PEDIR AHORA
             </button>
         </div>
     </footer>
 
+    <div class="text-center p-10 opacity-40 text-[10px] font-medium">
+        App desarrollada por <b>Vibras Positivas</b> &copy; 2026<br>Reserva derechos de autor.
+    </div>
+
     <script>
-        const productos = [
+        const menuData = [
             { cat: "Platos Fuertes", items: [
                 { n: "Hamburguesa (120g + Queso + Tocineta + Papas)", p: 20000 },
                 { n: "Salchipapa (2 Salchichas Zenú + Tocineta + Papas)", p: 20000 },
@@ -62,73 +71,62 @@
                 { n: "Perras (4 Tocinetas + Queso + Huevo Codorniz)", p: 14000 },
                 { n: "Sandwich (Pan Danés + Jamón + Tocineta + Queso)", p: 10000 }
             ]},
-            { cat: "Especialidades con Frutas", items: [
-                { n: "Ensalada de Frutas 24oz", p: 28000 },
-                { n: "Ensalada de Frutas 16oz", p: 18000 },
-                { n: "Ensalada de Frutas 8oz", p: 10000 },
-                { n: "Fresas con Crema 24oz", p: 28000 },
-                { n: "Fresas con Crema 16oz", p: 18000 },
-                { n: "Fresas con Crema 8oz", p: 10000 },
+            { cat: "Frutas y Helados", items: [
+                { n: "Ensalada de Frutas 24oz", p: 28000 }, { n: "Ensalada de Frutas 16oz", p: 18000 }, { n: "Ensalada de Frutas 8oz", p: 10000 },
+                { n: "Ensalada de Frutas (Solo Fruta) 24oz", p: 20000 }, { n: "Ensalada de Frutas (Solo Fruta) 16oz", p: 14000 },
+                { n: "Fresas con Crema 24oz", p: 28000 }, { n: "Fresas con Crema 16oz", p: 18000 }, { n: "Fresas con Crema 8oz", p: 10000 },
                 { n: "Melocotones con Crema 16oz", p: 18000 },
-                { n: "Salpicón con Helado 16oz", p: 11000 },
-                { n: "Salpicón con Helado 12oz", p: 8500 },
-                { n: "Salpicón con Helado 9oz", p: 6000 }
+                { n: "Salpicón con Helado 16oz", p: 11000 }, { n: "Salpicón con Helado 12oz", p: 8500 }, { n: "Salpicón con Helado 9oz", p: 6000 }
             ]},
-            { cat: "Postres y Helados", items: [
+            { cat: "Postres Especiales", items: [
                 { n: "Banana Split", p: 14000 },
-                { n: "Waffle Especial", p: 18000 },
+                { n: "Waffle Especial (Helado + Frutas)", p: 18000 },
                 { n: "Waffle Sencillo", p: 14000 },
                 { n: "Brownie Caliente con Helado", p: 14000 },
                 { n: "Mini Brownie con Helado", p: 7000 },
-                { n: "Oblea Especial", p: 6000 },
-                { n: "Oblea Tradicional", p: 4000 },
-                { n: "Vasitos Helado (16oz)", p: 10000 },
-                { n: "Vasitos Helado (12oz)", p: 8000 },
-                { n: "Helado Artesanal (Bola)", p: 3000 },
-                { n: "Postre Napoleón/Milo/Oreo", p: 9000 },
+                { n: "Oblea Especial", p: 6000 }, { n: "Oblea Tradicional", p: 4000 },
+                { n: "Postre Napoleón / Milo / Oreo", p: 9000 },
                 { n: "Cheesecake", p: 10000 }
             ]},
-            { cat: "Bebidas", items: [
-                { n: "Malteadas (Oreo/Milo/Fresa/Vainilla)", p: 12000 },
-                { n: "Jugos Especiales", p: 10000 },
-                { n: "Jugo Natural en Leche", p: 9000 },
-                { n: "Jugo Natural en Agua", p: 7000 },
-                { n: "Limonada Coco/Cereza/Sandía", p: 10000 }
+            { cat: "Helados y Bebidas", items: [
+                { n: "Vasitos de Helado 16oz", p: 10000 }, { n: "Vasitos 12oz", p: 8000 }, { n: "Vasitos 9oz", p: 6000 },
+                { n: "Helado Artesanal (1 Bola)", p: 3000 }, { n: "Paleta de Kola con Leche", p: 1500 }, { n: "Paleta de Agua", p: 1000 },
+                { n: "Malteadas (Oreo/Milo/Fresa/Café)", p: 12000 },
+                { n: "Jugos Especiales (Frutos Rojos/Verdes)", p: 10000 },
+                { n: "Jugo Natural en Leche", p: 9000 }, { n: "Jugo Natural en Agua", p: 7000 },
+                { n: "Limonadas Especiales (Coco/Cereza)", p: 10000 }
             ]},
-            { cat: "Snacks y Tortas", items: [
-                { n: "Palito de Queso", p: 2000 },
-                { n: "Palito Queso con Bocadillo", p: 2500 },
-                { n: "Palito Jamón y Queso", p: 2500 },
-                { n: "Porción Torta Chocolate/Arequipe", p: 4000 },
-                { n: "Porción Torta Zanahoria", p: 4000 },
-                { n: "Porción Torta Naranja/Yogurt", p: 3500 }
+            { cat: "Pasabocas y Tortas", items: [
+                { n: "Palito de Queso", p: 2000 }, { n: "Palito Queso y Bocadillo", p: 2500 }, { n: "Palito Jamón y Queso", p: 2500 },
+                { n: "Porción Torta Chocolate / Zanahoria", p: 4000 },
+                { n: "Porción Torta Naranja / Yogurt", p: 3500 }
             ]}
         ];
 
         let carrito = {};
 
-        function init() {
-            const menuHtml = productos.map(c => `
-                <div>
+        function render() {
+            const container = document.getElementById('menu-completo');
+            container.innerHTML = menuData.map(c => `
+                <div class="mb-6">
                     <span class="category-header uppercase text-[10px] tracking-widest italic">${c.cat}</span>
-                    <div class="grid gap-2 mt-3">
+                    <div class="grid gap-2 mt-4">
                         ${c.items.map(i => `
                             <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm product-card">
-                                <div class="flex-1 pr-2">
+                                <div class="flex-1 pr-4">
                                     <h4 class="font-bold text-gray-800 text-[13px] leading-tight">${i.n}</h4>
                                     <p class="text-pink-600 font-black">$${i.p.toLocaleString()}</p>
                                 </div>
-                                <div class="flex items-center gap-2 bg-pink-50 rounded-xl p-1 border border-pink-100">
-                                    <button onclick="change('${i.n}',-1,${i.p})" class="w-7 h-7 bg-white rounded-lg font-bold text-pink-300">-</button>
-                                    <span id="q-${i.n}" class="w-4 text-center font-bold text-xs text-gray-600">0</span>
-                                    <button onclick="change('${i.n}',1,${i.p})" class="w-7 h-7 bg-white rounded-lg font-bold text-pink-600">+</button>
+                                <div class="flex items-center gap-3 bg-pink-50 rounded-xl p-1 border border-pink-100">
+                                    <button onclick="change('${i.n}',-1,${i.p})" class="w-8 h-8 bg-white rounded-lg font-bold text-pink-300 shadow-sm">-</button>
+                                    <span id="q-${i.n}" class="w-4 text-center font-bold text-gray-600">0</span>
+                                    <button onclick="change('${i.n}',1,${i.p})" class="w-8 h-8 bg-white rounded-lg font-bold text-pink-600 shadow-sm">+</button>
                                 </div>
                             </div>
                         `).join('')}
                     </div>
                 </div>
             `).join('');
-            document.getElementById('menu-full').innerHTML = menuHtml;
         }
 
         function change(n, c, p) {
@@ -143,38 +141,43 @@
         function enviarWhatsApp() {
             const nom = document.getElementById('nombre').value;
             const dir = document.getElementById('direccion').value;
+            const tel = document.getElementById('telefono').value;
             const pag = document.getElementById('metodoPago').value;
             const obs = document.getElementById('observaciones').value;
             const fecha = new Date().toLocaleString('es-CO');
 
-            if(!nom || !dir) return alert("Completa tus datos de envío");
+            if(!nom || !dir) return alert("Por favor completa los datos de entrega");
 
-            let pedido = "";
+            let pedidoItems = "";
             let t = 0;
             for(let k in carrito) {
                 if(carrito[k].q > 0) {
-                    pedido += `✅ ${carrito[k].q}x ${k}\n`;
+                    pedidoItems += `✅ ${carrito[k].q}x ${k}\n`;
                     t += carrito[k].q * carrito[k].p;
                 }
             }
 
             if(t === 0) return alert("El carrito está vacío");
 
-            const msg = encodeURIComponent(
-                `🍦 *NUEVO PEDIDO RICA FRUTA*\n` +
-                `--------------------------\n` +
+            const mensaje = encodeURIComponent(
+                `🍦 *PEDIDO - HELADOS RICA FRUTA* 🍦\n` +
+                `----------------------------------\n` +
                 `📅 *Fecha:* ${fecha}\n` +
                 `👤 *Cliente:* ${nom}\n` +
                 `📍 *Dir:* ${dir}\n` +
-                `--------------------------\n` +
-                `🛒 *PEDIDO:*\n${pedido}\n` +
+                `📞 *Cel:* ${tel}\n` +
+                `----------------------------------\n` +
+                `🛒 *DETALLE:*\n${pedidoItems}\n` +
                 `💰 *Pago:* ${pag}\n` +
-                `📝 *Notas:* ${obs || 'Sin notas'}\n` +
-                `💵 *TOTAL: $${t.toLocaleString()}*`
+                `📝 *Notas:* ${obs || 'Sin observaciones'}\n` +
+                `----------------------------------\n` +
+                `💵 *TOTAL: $${t.toLocaleString()}*\n\n` +
+                `🚀 *App desarrollada por Vibras Positivas*\n` +
+                `🔒 *Reserva derechos de autor*`
             );
-            window.open(`https://api.whatsapp.com/send?phone=573137220124&text=${msg}`);
+            window.open(`https://api.whatsapp.com/send?phone=573137220124&text=${mensaje}`);
         }
-        init();
+        render();
     </script>
 </body>
 </html>
