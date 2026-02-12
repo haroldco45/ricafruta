@@ -3,218 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helados Rica Fruta - Pedidos Online</title>
+    <title>Helados Rica Fruta - Pedidos</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .product-card { transition: all 0.2s ease; border-left: 4px solid transparent; }
-        .product-card:hover { border-left: 4px solid #ec4899; }
-        .category-header { background: linear-gradient(to right, #fbcfe8, #fdf2f8); }
-        input:focus, textarea:focus { outline: 2px solid #ec4899; border:none; }
+        .product-card { border-radius: 1rem; overflow: hidden; transition: 0.2s; border: 1px solid #fee2e2; }
+        .category-tag { background: #f472b6; color: white; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
     </style>
 </head>
-<body class="bg-slate-50 pb-32">
+<body class="bg-pink-50 pb-40">
 
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-md mx-auto p-4 text-center">
-            <img src="rica-fruta.PNG" alt="Logo Rica Fruta" class="mx-auto h-28 mb-1" onerror="this.src='https://via.placeholder.com/150?text=RICA+FRUTA'">
-            <h1 class="text-pink-600 font-black text-xl tracking-tighter">HELADOS RICA FRUTA</h1>
-            <div class="flex justify-center items-center gap-2 text-gray-500 text-xs mt-1">
-                <span><i class="fas fa-map-marker-alt text-red-500"></i> B. El Triángulo</span>
-                <span>•</span>
-                <span><i class="fab fa-whatsapp text-green-500"></i> 3137220124</span>
-            </div>
-        </div>
+    <header class="bg-white p-6 text-center shadow-sm">
+        <img src="rica-fruta.PNG" alt="Logo Rica Fruta" class="mx-auto h-32 mb-2" onerror="this.src='https://via.placeholder.com/200x150?text=LOGO+RICA+FRUTA'">
+        <h1 class="text-2xl font-black text-pink-600">HELADOS RICA FRUTA</h1>
+        <p class="text-gray-500 text-sm font-semibold"><i class="fab fa-whatsapp text-green-500"></i> 3137220124 | B. El Triángulo</p>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
 
         <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
-            <h2 class="font-bold text-gray-800 text-sm flex items-center gap-2 uppercase tracking-wider">
-                <i class="fas fa-user-edit text-pink-500"></i> Datos de Envío
-            </h2>
-            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
-            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
-            <input type="tel" id="telefono" placeholder="Número de celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Datos de Envío</h2>
+            <input type="text" id="nombre" placeholder="Tu nombre" class="w-full p-3 bg-gray-50 rounded-xl border-none">
+            <input type="text" id="direccion" placeholder="Dirección y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none">
+            <input type="tel" id="telefono" placeholder="Número de Celular" class="w-full p-3 bg-gray-50 rounded-xl border-none">
         </section>
 
-        <div id="menu-dinamico" class="space-y-8">
+        <div id="lista-productos" class="grid gap-4">
             </div>
 
-        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3 border-t-4 border-pink-400">
-            <h2 class="font-bold text-gray-800 text-sm uppercase">Detalles adicionales</h2>
-            <textarea id="observaciones" placeholder="Ej: Sin cebolla, el helado de chocolate, traer cambio de $50k..." class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm h-24"></textarea>
-            
-            <label class="text-xs font-bold text-gray-400 uppercase">Forma de Pago</label>
-            <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm font-semibold text-gray-700">
+        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Detalles del Pedido</h2>
+            <textarea id="observaciones" placeholder="Instrucciones especiales..." class="w-full p-3 bg-gray-50 rounded-xl border-none h-24"></textarea>
+            <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none font-bold text-gray-600">
                 <option value="Efectivo">Efectivo</option>
-                <option value="Transferencia (Nequi/Bancolombia)">Transferencia</option>
-                <option value="Datáfono">Datáfono</option>
+                <option value="Transferencia">Transferencia Nequi/Ahorro a la mano</option>
             </select>
         </section>
 
     </main>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t p-4 z-50">
+    <footer class="fixed bottom-0 left-0 right-0 bg-white border-t p-5 shadow-2xl z-50">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
-                <p class="text-[10px] uppercase font-bold text-gray-400">Total a pagar</p>
-                <p class="text-2xl font-black text-pink-600" id="totalDisplay">$0</p>
+                <p class="text-[10px] uppercase font-bold text-gray-400">Total a Pagar</p>
+                <p id="totalDisplay" class="text-2xl font-black text-pink-600">$0</p>
             </div>
-            <button onclick="confirmarPedido()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 shadow-lg transition-transform active:scale-95">
+            <button onclick="enviarPedido()" class="bg-green-500 text-white px-8 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-2">
                 <i class="fab fa-whatsapp text-xl"></i> PEDIR AHORA
             </button>
         </div>
-        <div id="sub-check" style="display:none">vibras-positivas-2026-auth</div>
     </footer>
 
-    <div class="max-w-md mx-auto text-center py-10 opacity-40">
-        <p class="text-[10px]">App desarrollada por <b>Vibras Positivas</b> &copy; 2026<br>Todos los derechos reservados.</p>
+    <div class="text-center p-10 opacity-30 text-[10px]">
+        App desarrollada por <b>Vibras Positivas</b> &copy; 2026<br>Todos los derechos reservados.
     </div>
 
     <script>
         // LISTA DE PRODUCTOS EXTRAÍDA DE TUS FOTOS
-        const menu = [
-            {
-                categoria: "Comida Rápida",
-                items: [
-                    { n: "Hamburguesa Especial (Carne 120g + Papas)", p: 20000 },
-                    { n: "Salchipapa (2 Salchichas + Tocinetas)", p: 20000 },
-                    { n: "Chuzo de Pollo (200g + Papas)", p: 20000 },
-                    { n: "Perros (Salchicha Zenú)", p: 13000 },
-                    { n: "Perras (4 Tocinetas)", p: 14000 },
-                    { n: "Sandwich Pan Danés", p: 10000 }
-                ]
-            },
-            {
-                categoria: "Ensaladas y Frutas",
-                items: [
-                    { n: "Ensalada de Frutas 16oz (Completa)", p: 18000 },
-                    { n: "Ensalada de Frutas 8oz (Completa)", p: 10000 },
-                    { n: "Fresas con Crema 16oz", p: 18000 },
-                    { n: "Melocotones con Crema 16oz", p: 18000 },
-                    { n: "Salpicón con Helado 12oz", p: 8500 },
-                    { n: "Banana Split", p: 14000 }
-                ]
-            },
-            {
-                categoria: "Helados y Postres",
-                items: [
-                    { n: "Brownie Caliente con Helado", p: 14000 },
-                    { n: "Waffle Especial", p: 18000 },
-                    { n: "Helado Artesanal (Vaso)", p: 3000 },
-                    { n: "Oblea Especial", p: 6000 },
-                    { n: "Porción de Postre (Napoleón/Milo)", p: 10000 }
-                ]
-            },
-            {
-                categoria: "Bebidas",
-                items: [
-                    { n: "Malteada Especial", p: 12000 },
-                    { n: "Limonada de Coco/Cereza", p: 10000 },
-                    { n: "Jugo Natural en Leche", p: 9000 },
-                    { n: "Jugo Natural en Agua", p: 7000 }
-                ]
-            },
-            {
-                categoria: "Snacks",
-                items: [
-                    { n: "Palito de Queso", p: 2000 },
-                    { n: "Palito Jamón y Queso", p: 2500 },
-                    { n: "Porción de Torta", p: 4000 }
-                ]
-            }
+        const data = [
+            // FOTO 1: SALADOS Y TORTAS
+            { n: "Hamburguesa Artesanal (120g + Papas)", p: 20000, cat: "Comida Rápida" },
+            { n: "Salchipapa (2 Salchichas + Tocineta)", p: 20000, cat: "Comida Rápida" },
+            { n: "Chuzo de Pollo (200g + Papas)", p: 20000, cat: "Comida Rápida" },
+            { n: "Sandwich Pan Danés", p: 10000, cat: "Comida Rápida" },
+            { n: "Palito de Queso", p: 2000, cat: "Pasabocas" },
+            { n: "Porción de Torta de Chocolate", p: 4000, cat: "Pasabocas" },
+            
+            // FOTO 2: HELADOS Y FRUTAS
+            { n: "Ensalada de Frutas 16oz (Completa)", p: 18000, cat: "Helados" },
+            { n: "Fresas con Crema 16oz", p: 18000, cat: "Helados" },
+            { n: "Banana Split", p: 14000, cat: "Helados" },
+            { n: "Brownie Caliente con Helado", p: 14000, cat: "Helados" },
+            { n: "Salpicón con Helado 12oz", p: 8500, cat: "Helados" },
+            { n: "Waffle Especial", p: 18000, cat: "Helados" },
+
+            // FOTO 3: BEBIDAS
+            { n: "Malteada (Oreo, Milo, Fresa)", p: 12000, cat: "Bebidas" },
+            { n: "Jugo Natural en Leche", p: 9000, cat: "Bebidas" },
+            { n: "Limonada de Coco", p: 10000, cat: "Bebidas" }
         ];
 
         let carrito = {};
 
-        function cargarMenu() {
-            const container = document.getElementById('menu-dinamico');
-            let html = "";
-            menu.forEach(cat => {
-                html += `<div class="category-section">
-                    <h3 class="category-header p-3 rounded-lg font-bold text-pink-700 mb-3 sticky top-[180px] z-10 shadow-sm">${cat.categoria}</h3>
-                    <div class="space-y-3">`;
-                cat.items.forEach(item => {
-                    html += `
-                        <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm product-card">
-                            <div class="flex-1">
-                                <h4 class="font-bold text-gray-800 text-sm">${item.n}</h4>
-                                <p class="text-pink-600 font-extrabold">$${item.p.toLocaleString()}</p>
-                            </div>
-                            <div class="flex items-center gap-3 bg-gray-50 p-1 rounded-xl border">
-                                <button onclick="modificar('${item.n}', -1, ${item.p})" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-red-500 font-bold">-</button>
-                                <span id="qty-${item.n}" class="w-5 text-center font-bold text-gray-700">0</span>
-                                <button onclick="modificar('${item.n}', 1, ${item.p})" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-pink-600 font-bold">+</button>
-                            </div>
-                        </div>`;
-                });
-                html += `</div></div>`;
-            });
-            container.innerHTML = html;
+        function render() {
+            const container = document.getElementById('lista-productos');
+            container.innerHTML = data.map(i => `
+                <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm product-card">
+                    <div>
+                        <span class="category-tag mb-1 inline-block">${i.cat}</span>
+                        <h4 class="font-bold text-gray-800 text-sm">${i.n}</h4>
+                        <p class="text-pink-600 font-black">$${i.p.toLocaleString()}</p>
+                    </div>
+                    <div class="flex items-center gap-3 bg-pink-50 p-2 rounded-xl">
+                        <button onclick="mod('${i.n}', -1, ${i.p})" class="font-bold text-pink-400 px-2">-</button>
+                        <span id="q-${i.n}" class="font-bold text-gray-700">0</span>
+                        <button onclick="mod('${i.n}', 1, ${i.p})" class="font-bold text-pink-600 px-2">+</button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function modificar(nombre, cantidad, precio) {
-            if (!carrito[nombre]) carrito[nombre] = { qty: 0, price: precio };
-            carrito[nombre].qty = Math.max(0, carrito[nombre].qty + cantidad);
-            document.getElementById(`qty-${nombre}`).innerText = carrito[nombre].qty;
-            actualizarTotal();
+        function mod(n, c, p) {
+            if(!carrito[n]) carrito[n] = { q:0, p:p };
+            carrito[n].q = Math.max(0, carrito[n].q + c);
+            document.getElementById(`q-${n}`).innerText = carrito[n].q;
+            let t = 0;
+            for(let x in carrito) t += carrito[x].q * carrito[x].p;
+            document.getElementById('totalDisplay').innerText = `$${t.toLocaleString()}`;
         }
 
-        function actualizarTotal() {
-            let total = 0;
-            for (let id in carrito) {
-                total += carrito[id].qty * carrito[id].price;
-            }
-            document.getElementById('totalDisplay').innerText = `$${total.toLocaleString()}`;
-        }
-
-        function confirmarPedido() {
-            const cliente = document.getElementById('nombre').value;
+        function enviarPedido() {
+            const nom = document.getElementById('nombre').value;
             const dir = document.getElementById('direccion').value;
             const tel = document.getElementById('telefono').value;
-            const notas = document.getElementById('observaciones').value;
-            const pago = document.getElementById('metodoPago').value;
-            const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
+            const pag = document.getElementById('metodoPago').value;
+            const obs = document.getElementById('observaciones').value;
+            const fecha = new Date().toLocaleString();
 
-            if (!cliente || !dir || !tel) {
-                alert("Por favor, completa tus datos de envío.");
-                return;
-            }
+            if(!nom || !dir) return alert("Faltan datos de envío");
 
-            let articulos = "";
-            let totalFinal = 0;
-            for (let id in carrito) {
-                if (carrito[id].qty > 0) {
-                    articulos += `✅ ${carrito[id].qty}x ${id}\n`;
-                    totalFinal += carrito[id].qty * carrito[id].price;
+            let items = "";
+            let t = 0;
+            for(let x in carrito) {
+                if(carrito[x].q > 0) {
+                    items += `✅ ${carrito[x].q}x ${x} ($${(carrito[x].q * carrito[x].p).toLocaleString()})\n`;
+                    t += carrito[x].q * carrito[x].p;
                 }
             }
 
-            if (totalFinal === 0) {
-                alert("El carrito está vacío.");
-                return;
-            }
+            if(t === 0) return alert("Agrega algo al pedido");
 
-            const mensaje = encodeURIComponent(
-                `🍦 *PEDIDO RICA FRUTA* 🍦\n` +
-                `----------------------------------\n` +
+            const msg = encodeURIComponent(
+                `🍦 *PEDIDO RICA FRUTA*\n` +
+                `--------------------------\n` +
                 `📅 *Fecha:* ${fecha}\n` +
-                `👤 *Cliente:* ${cliente}\n` +
-                `📍 *Dirección:* ${dir}\n` +
-                `📞 *Celular:* ${tel}\n` +
-                `----------------------------------\n` +
-                `🛒 *PRODUCTOS:*\n${articulos}\n` +
-                `💰 *Método de Pago:* ${pago}\n` +
-                `📝 *Notas:* ${notas || "Sin observaciones"}\n` +
-                `----------------------------------\n` +
-                `💵 *TOTAL: $${totalFinal.toLocaleString()}*`
+                `👤 *Cliente:* ${nom}\n` +
+                `📍 *Dir:* ${dir}\n` +
+                `📞 *Cel:* ${tel}\n` +
+                `--------------------------\n` +
+                `🛒 *PEDIDO:*\n${items}\n` +
+                `💰 *Pago:* ${pag}\n` +
+                `📝 *Notas:* ${obs}\n` +
+                `💵 *TOTAL: $${t.toLocaleString()}*`
             );
-
-            window.open(`https://api.whatsapp.com/send?phone=573137220124&text=${mensaje}`);
+            window.open(`https://api.whatsapp.com/send?phone=573137220124&text=${msg}`);
         }
 
-        window.onload = cargarMenu;
+        render();
     </script>
 </body>
 </html>
