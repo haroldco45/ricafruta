@@ -3,44 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helados Rica Fruta - Domicilios</title>
+    <title>Helados Rica Fruta - Pedidos Online</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-pink: #ffdae9;
-            --brand-red: #e63946;
-        }
-        body { background-color: #fdf2f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .product-card { transition: transform 0.2s; }
-        .product-card:hover { transform: scale(1.02); }
-        .bg-brand { background-color: #f472b6; }
+        .product-card { transition: all 0.2s ease; border-left: 4px solid transparent; }
+        .product-card:hover { border-left: 4px solid #ec4899; }
+        .category-header { background: linear-gradient(to right, #fbcfe8, #fdf2f8); }
+        input:focus, textarea:focus { outline: 2px solid #ec4899; border:none; }
     </style>
 </head>
-<body class="pb-24">
+<body class="bg-slate-50 pb-32">
 
-    <header class="bg-white shadow-md p-4 text-center sticky top-0 z-50">
-        <img src="rica-fruta.PNG" alt="Logo Rica Fruta" class="mx-auto h-24 mb-2">
-        <h1 class="text-xl font-bold text-pink-600">PEDIDOS DOMICILIOS</h1>
-        <p class="text-sm text-gray-600"><i class="fab fa-whatsapp text-green-500"></i> 3137220124 | B. El Triángulo</p>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-md mx-auto p-4 text-center">
+            <img src="rica-fruta.PNG" alt="Logo Rica Fruta" class="mx-auto h-28 mb-1" onerror="this.src='https://via.placeholder.com/150?text=RICA+FRUTA'">
+            <h1 class="text-pink-600 font-black text-xl tracking-tighter">HELADOS RICA FRUTA</h1>
+            <div class="flex justify-center items-center gap-2 text-gray-500 text-xs mt-1">
+                <span><i class="fas fa-map-marker-alt text-red-500"></i> B. El Triángulo</span>
+                <span>•</span>
+                <span><i class="fab fa-whatsapp text-green-500"></i> 3137220124</span>
+            </div>
+        </div>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-6">
 
-        <section class="bg-white p-4 rounded-xl shadow-sm space-y-3">
-            <h2 class="font-bold border-b pb-2 text-gray-700 uppercase text-sm">Datos de Entrega</h2>
-            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-2 border rounded-lg text-sm">
-            <input type="text" id="direccion" placeholder="Dirección exacta" class="w-full p-2 border rounded-lg text-sm">
-            <input type="tel" id="telefono" placeholder="Celular de contacto" class="w-full p-2 border rounded-lg text-sm">
+        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
+            <h2 class="font-bold text-gray-800 text-sm flex items-center gap-2 uppercase tracking-wider">
+                <i class="fas fa-user-edit text-pink-500"></i> Datos de Envío
+            </h2>
+            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+            <input type="tel" id="telefono" placeholder="Número de celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
         </section>
 
-        <div id="menu-container" class="space-y-8">
+        <div id="menu-dinamico" class="space-y-8">
             </div>
 
-        <section class="bg-white p-4 rounded-xl shadow-sm space-y-3">
-            <h2 class="font-bold border-b pb-2 text-gray-700 uppercase text-sm">Detalles del Pedido</h2>
-            <textarea id="observaciones" placeholder="¿Alguna instrucción especial? (ej. sin cebolla, más salsas...)" class="w-full p-2 border rounded-lg text-sm h-20"></textarea>
-            <select id="metodoPago" class="w-full p-2 border rounded-lg text-sm bg-gray-50">
+        <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3 border-t-4 border-pink-400">
+            <h2 class="font-bold text-gray-800 text-sm uppercase">Detalles adicionales</h2>
+            <textarea id="observaciones" placeholder="Ej: Sin cebolla, el helado de chocolate, traer cambio de $50k..." class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm h-24"></textarea>
+            
+            <label class="text-xs font-bold text-gray-400 uppercase">Forma de Pago</label>
+            <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm font-semibold text-gray-700">
                 <option value="Efectivo">Efectivo</option>
                 <option value="Transferencia (Nequi/Bancolombia)">Transferencia</option>
                 <option value="Datáfono">Datáfono</option>
@@ -49,134 +55,166 @@
 
     </main>
 
-    <footer class="fixed bottom-0 w-full bg-white border-t p-4 flex justify-between items-center shadow-lg max-w-md left-1/2 -translate-x-1/2">
-        <div>
-            <p class="text-xs text-gray-500">Total a pagar:</p>
-            <p class="text-xl font-bold text-pink-600" id="totalDisplay">$0</p>
+    <footer class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t p-4 z-50">
+        <div class="max-w-md mx-auto flex justify-between items-center">
+            <div>
+                <p class="text-[10px] uppercase font-bold text-gray-400">Total a pagar</p>
+                <p class="text-2xl font-black text-pink-600" id="totalDisplay">$0</p>
+            </div>
+            <button onclick="confirmarPedido()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-2 shadow-lg transition-transform active:scale-95">
+                <i class="fab fa-whatsapp text-xl"></i> PEDIR AHORA
+            </button>
         </div>
-        <button onclick="enviarWhatsApp()" class="bg-green-500 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2 hover:bg-green-600">
-            <i class="fab fa-whatsapp"></i> PEDIR YA
-        </button>
+        <div id="sub-check" style="display:none">vibras-positivas-2026-auth</div>
     </footer>
 
-    <div class="text-center p-8 opacity-50">
-        <p class="text-[10px]">App desarrollada por **Vibras Positivas** &copy; 2026<br>Todos los derechos reservados.</p>
+    <div class="max-w-md mx-auto text-center py-10 opacity-40">
+        <p class="text-[10px]">App desarrollada por <b>Vibras Positivas</b> &copy; 2026<br>Todos los derechos reservados.</p>
     </div>
 
     <script>
-        const productos = [
-            { cat: "Platos Fuertes", items: [
-                { n: "Hamburguesa (Carne 120g + Papas)", p: 20000 },
-                { n: "Salchipapa (2 Salchichas + Tocinetas)", p: 20000 },
-                { n: "Chuzo de Pollo (200g + Papas)", p: 20000 },
-                { n: "Perros (Salchicha Zenú)", p: 13000 },
-                { n: "Perras (4 Tocinetas)", p: 14000 },
-                { n: "Sandwich", p: 10000 }
-            ]},
-            { cat: "Especialidades de Helado", items: [
-                { n: "Ensalada de Frutas 16oz", p: 18000 },
-                { n: "Fresas con Crema 16oz", p: 18000 },
-                { n: "Brownie Caliente con Helado", p: 14000 },
-                { n: "Banana Split", p: 14000 },
-                { n: "Waffle Especial", p: 18000 },
-                { n: "Salpicón con Helado 12oz", p: 8500 }
-            ]},
-            { cat: "Bebidas y Otros", items: [
-                { n: "Malteada", p: 12000 },
-                { n: "Jugo Natural en Agua", p: 7000 },
-                { n: "Jugo Natural en Leche", p: 9000 },
-                { n: "Limonada Especial", p: 10000 },
-                { n: "Palito de Queso", p: 2000 },
-                { n: "Porción de Torta", p: 4000 }
-            ]}
+        // LISTA DE PRODUCTOS EXTRAÍDA DE TUS FOTOS
+        const menu = [
+            {
+                categoria: "Comida Rápida",
+                items: [
+                    { n: "Hamburguesa Especial (Carne 120g + Papas)", p: 20000 },
+                    { n: "Salchipapa (2 Salchichas + Tocinetas)", p: 20000 },
+                    { n: "Chuzo de Pollo (200g + Papas)", p: 20000 },
+                    { n: "Perros (Salchicha Zenú)", p: 13000 },
+                    { n: "Perras (4 Tocinetas)", p: 14000 },
+                    { n: "Sandwich Pan Danés", p: 10000 }
+                ]
+            },
+            {
+                categoria: "Ensaladas y Frutas",
+                items: [
+                    { n: "Ensalada de Frutas 16oz (Completa)", p: 18000 },
+                    { n: "Ensalada de Frutas 8oz (Completa)", p: 10000 },
+                    { n: "Fresas con Crema 16oz", p: 18000 },
+                    { n: "Melocotones con Crema 16oz", p: 18000 },
+                    { n: "Salpicón con Helado 12oz", p: 8500 },
+                    { n: "Banana Split", p: 14000 }
+                ]
+            },
+            {
+                categoria: "Helados y Postres",
+                items: [
+                    { n: "Brownie Caliente con Helado", p: 14000 },
+                    { n: "Waffle Especial", p: 18000 },
+                    { n: "Helado Artesanal (Vaso)", p: 3000 },
+                    { n: "Oblea Especial", p: 6000 },
+                    { n: "Porción de Postre (Napoleón/Milo)", p: 10000 }
+                ]
+            },
+            {
+                categoria: "Bebidas",
+                items: [
+                    { n: "Malteada Especial", p: 12000 },
+                    { n: "Limonada de Coco/Cereza", p: 10000 },
+                    { n: "Jugo Natural en Leche", p: 9000 },
+                    { n: "Jugo Natural en Agua", p: 7000 }
+                ]
+            },
+            {
+                categoria: "Snacks",
+                items: [
+                    { n: "Palito de Queso", p: 2000 },
+                    { n: "Palito Jamón y Queso", p: 2500 },
+                    { n: "Porción de Torta", p: 4000 }
+                ]
+            }
         ];
 
         let carrito = {};
 
-        function renderMenu() {
-            const container = document.getElementById('menu-container');
-            productos.forEach(seccion => {
-                let html = `<div class="space-y-3"><h3 class="text-lg font-bold text-pink-700 ml-2">${seccion.cat}</h3>`;
-                seccion.items.forEach(item => {
+        function cargarMenu() {
+            const container = document.getElementById('menu-dinamico');
+            let html = "";
+            menu.forEach(cat => {
+                html += `<div class="category-section">
+                    <h3 class="category-header p-3 rounded-lg font-bold text-pink-700 mb-3 sticky top-[180px] z-10 shadow-sm">${cat.categoria}</h3>
+                    <div class="space-y-3">`;
+                cat.items.forEach(item => {
                     html += `
-                        <div class="bg-white p-3 rounded-lg flex justify-between items-center shadow-sm product-card">
+                        <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm product-card">
                             <div class="flex-1">
-                                <p class="font-medium text-gray-800">${item.n}</p>
-                                <p class="text-pink-600 font-bold">$${item.p.toLocaleString()}</p>
+                                <h4 class="font-bold text-gray-800 text-sm">${item.n}</h4>
+                                <p class="text-pink-600 font-extrabold">$${item.p.toLocaleString()}</p>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <button onclick="updateQty('${item.n}', -1, ${item.p})" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold">-</button>
-                                <span id="qty-${item.n}" class="w-4 text-center font-bold">0</span>
-                                <button onclick="updateQty('${item.n}', 1, ${item.p})" class="w-8 h-8 rounded-full bg-pink-100 text-pink-600 flex items-center justify-center font-bold">+</button>
+                            <div class="flex items-center gap-3 bg-gray-50 p-1 rounded-xl border">
+                                <button onclick="modificar('${item.n}', -1, ${item.p})" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-red-500 font-bold">-</button>
+                                <span id="qty-${item.n}" class="w-5 text-center font-bold text-gray-700">0</span>
+                                <button onclick="modificar('${item.n}', 1, ${item.p})" class="w-8 h-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-pink-600 font-bold">+</button>
                             </div>
                         </div>`;
                 });
-                html += `</div>`;
-                container.innerHTML += html;
+                html += `</div></div>`;
             });
+            container.innerHTML = html;
         }
 
-        function updateQty(name, change, price) {
-            if (!carrito[name]) carrito[name] = { qty: 0, price: price };
-            carrito[name].qty = Math.max(0, carrito[name].qty + change);
-            document.getElementById(`qty-${name}`).innerText = carrito[name].qty;
-            calcularTotal();
+        function modificar(nombre, cantidad, precio) {
+            if (!carrito[nombre]) carrito[nombre] = { qty: 0, price: precio };
+            carrito[nombre].qty = Math.max(0, carrito[nombre].qty + cantidad);
+            document.getElementById(`qty-${nombre}`).innerText = carrito[nombre].qty;
+            actualizarTotal();
         }
 
-        function calcularTotal() {
+        function actualizarTotal() {
             let total = 0;
-            for (let item in carrito) {
-                total += carrito[item].qty * carrito[item].price;
+            for (let id in carrito) {
+                total += carrito[id].qty * carrito[id].price;
             }
             document.getElementById('totalDisplay').innerText = `$${total.toLocaleString()}`;
         }
 
-        function enviarWhatsApp() {
-            const nombre = document.getElementById('nombre').value;
-            const direccion = document.getElementById('direccion').value;
-            const telefono = document.getElementById('telefono').value;
+        function confirmarPedido() {
+            const cliente = document.getElementById('nombre').value;
+            const dir = document.getElementById('direccion').value;
+            const tel = document.getElementById('telefono').value;
             const notas = document.getElementById('observaciones').value;
             const pago = document.getElementById('metodoPago').value;
-            const fecha = new Date().toLocaleString('es-CO');
+            const fecha = new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' });
 
-            if (!nombre || !direccion) {
-                alert("Por favor completa nombre y dirección");
+            if (!cliente || !dir || !tel) {
+                alert("Por favor, completa tus datos de envío.");
                 return;
             }
 
-            let pedidoTexto = `🍦 *NUEVO PEDIDO - HELADOS RICA FRUTA* 🍦\n`;
-            pedidoTexto += `--------------------------------\n`;
-            pedidoTexto += `📅 *Fecha:* ${fecha}\n`;
-            pedidoTexto += `👤 *Cliente:* ${nombre}\n`;
-            pedidoTexto += `📍 *Dirección:* ${direccion}\n`;
-            pedidoTexto += `📞 *Celular:* ${telefono}\n`;
-            pedidoTexto += `--------------------------------\n`;
-            pedidoTexto += `🛒 *DETALLE DEL PEDIDO:*\n`;
-
-            let tieneItems = false;
-            for (let item in carrito) {
-                if (carrito[item].qty > 0) {
-                    pedidoTexto += `- ${carrito[item].qty}x ${item} ($${(carrito[item].qty * carrito[item].price).toLocaleString()})\n`;
-                    tieneItems = true;
+            let articulos = "";
+            let totalFinal = 0;
+            for (let id in carrito) {
+                if (carrito[id].qty > 0) {
+                    articulos += `✅ ${carrito[id].qty}x ${id}\n`;
+                    totalFinal += carrito[id].qty * carrito[id].price;
                 }
             }
 
-            if (!tieneItems) {
-                alert("Agrega al menos un producto");
+            if (totalFinal === 0) {
+                alert("El carrito está vacío.");
                 return;
             }
 
-            pedidoTexto += `--------------------------------\n`;
-            pedidoTexto += `📝 *Notas:* ${notas || 'Ninguna'}\n`;
-            pedidoTexto += `💰 *Forma de Pago:* ${pago}\n`;
-            pedidoTexto += `💵 *TOTAL A PAGAR: ${document.getElementById('totalDisplay').innerText}*\n\n`;
-            pedidoTexto += `_Pedido enviado desde la App Oficial_`;
+            const mensaje = encodeURIComponent(
+                `🍦 *PEDIDO RICA FRUTA* 🍦\n` +
+                `----------------------------------\n` +
+                `📅 *Fecha:* ${fecha}\n` +
+                `👤 *Cliente:* ${cliente}\n` +
+                `📍 *Dirección:* ${dir}\n` +
+                `📞 *Celular:* ${tel}\n` +
+                `----------------------------------\n` +
+                `🛒 *PRODUCTOS:*\n${articulos}\n` +
+                `💰 *Método de Pago:* ${pago}\n` +
+                `📝 *Notas:* ${notas || "Sin observaciones"}\n` +
+                `----------------------------------\n` +
+                `💵 *TOTAL: $${totalFinal.toLocaleString()}*`
+            );
 
-            const url = `https://api.whatsapp.com/send?phone=573137220124&text=${encodeURIComponent(pedidoTexto)}`;
-            window.open(url, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=573137220124&text=${mensaje}`);
         }
 
-        renderMenu();
+        window.onload = cargarMenu;
     </script>
 </body>
 </html>
