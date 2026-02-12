@@ -3,43 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helados Rica Fruta - Pedidos Online</title>
+    <title>Helados Rica Fruta 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .product-card { border-radius: 1rem; transition: 0.2s; border: 1px solid #fce7f3; }
-        .category-header { background: #f472b6; color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; margin-top: 25px; display: inline-block; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .bg-pink-soft { background-color: #fdf2f8; }
+        .category-header { background: #f472b6; color: white; padding: 6px 15px; border-radius: 10px; font-weight: 800; margin-top: 25px; display: inline-block; }
     </style>
 </head>
-<body class="bg-pink-soft pb-40">
+<body class="bg-pink-50 pb-40">
 
     <header class="bg-white p-6 text-center shadow-md sticky top-0 z-50">
-        <img src="rica-fruta1.PNG" alt="Logo Rica Fruta" class="mx-auto h-32 mb-2" onerror="this.src='https://via.placeholder.com/200x150?text=RICA+FRUTA'">
+        <img src="rica-fruta1.PNG" alt="Logo Rica Fruta" class="mx-auto h-32 mb-2">
         <h1 class="text-xl font-black text-pink-600 uppercase italic">Domicilios: 3137220124</h1>
-        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Caucasia - B. El Triángulo</p>
+        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest text-center">Caucasia - B. El Triángulo</p>
     </header>
 
     <main class="max-w-md mx-auto p-4 space-y-4">
 
         <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3 border-l-4 border-pink-400">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest italic">Datos de Envío</h2>
-            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
-            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
-            <input type="tel" id="telefono" placeholder="Número de Celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm focus:ring-2 focus:ring-pink-300">
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest italic">Datos de Entrega</h2>
+            <input type="text" id="nombre" placeholder="Nombre completo" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+            <input type="text" id="direccion" placeholder="Dirección exacta y Barrio" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
+            <input type="tel" id="telefono" placeholder="Número de Celular" class="w-full p-3 bg-gray-50 rounded-xl border-none text-sm">
         </section>
 
         <div id="menu-completo"></div>
 
         <section class="bg-white p-5 rounded-2xl shadow-sm space-y-3">
-            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest">Detalles Adicionales</h2>
-            <textarea id="observaciones" placeholder="Ej: Sabores de helado, instrucciones de entrega..." class="w-full p-3 bg-gray-50 rounded-xl border-none h-24 text-sm focus:ring-2 focus:ring-pink-300"></textarea>
-            
-            <label class="text-[10px] font-bold text-gray-400 uppercase">Forma de Pago</label>
+            <h2 class="text-xs font-bold text-gray-400 uppercase tracking-widest text-center">Instrucciones Especiales</h2>
+            <textarea id="observaciones" placeholder="Ej: Sabores de helado, traer cambio de $50k..." class="w-full p-3 bg-gray-50 rounded-xl border-none h-24 text-sm"></textarea>
             <select id="metodoPago" class="w-full p-3 bg-gray-50 rounded-xl border-none font-bold text-gray-600">
                 <option value="Efectivo">Efectivo</option>
-                <option value="Transferencia (Nequi/Bancolombia)">Transferencia</option>
-                <option value="Datáfono">Datáfono</option>
+                <option value="Transferencia">Transferencia (Nequi/Bancolombia)</option>
             </select>
         </section>
 
@@ -48,8 +44,8 @@
     <footer class="fixed bottom-0 left-0 right-0 bg-white border-t p-5 shadow-2xl z-50">
         <div class="max-w-md mx-auto flex justify-between items-center">
             <div>
-                <p class="text-[10px] uppercase font-bold text-gray-400">Total a Pagar</p>
-                <p id="totalDisplay" class="text-3xl font-black text-pink-600">$0</p>
+                <p class="text-[10px] uppercase font-bold text-gray-400 leading-none">Total Pedido</p>
+                <p id="totalDisplay" class="text-3xl font-black text-pink-600 leading-tight">$0</p>
             </div>
             <button onclick="enviarWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-2xl font-bold shadow-lg flex items-center gap-2 active:scale-95 transition-all">
                 <i class="fab fa-whatsapp text-xl"></i> PEDIR AHORA
@@ -63,43 +59,39 @@
 
     <script>
         const menuData = [
-            { cat: "Platos Fuertes", items: [
-                { n: "Hamburguesa (120g + Queso + Tocineta + Papas)", p: 20000 },
-                { n: "Salchipapa (2 Salchichas Zenú + Tocineta + Papas)", p: 20000 },
-                { n: "Chuzo de Pollo (200g + Papas + Ensalada)", p: 20000 },
-                { n: "Perros (Salchicha Zenú + Queso + Huevo Codorniz)", p: 13000 },
-                { n: "Perras (4 Tocinetas + Queso + Huevo Codorniz)", p: 14000 },
-                { n: "Sandwich (Pan Danés + Jamón + Tocineta + Queso)", p: 10000 }
+            { cat: "Ensaladas de Frutas", items: [
+                { n: "Ensalada 24oz", p: 34000 }, { n: "Ensalada 16oz", p: 22000 }, { n: "Ensalada 8oz", p: 12000 },
+                { n: "Sólo Frutas 24oz", p: 22000 }, { n: "Sólo Frutas 16oz", p: 15000 }, { n: "Sólo Frutas 8oz", p: 8000 }
             ]},
-            { cat: "Frutas y Helados", items: [
-                { n: "Ensalada de Frutas 24oz", p: 28000 }, { n: "Ensalada de Frutas 16oz", p: 18000 }, { n: "Ensalada de Frutas 8oz", p: 10000 },
-                { n: "Ensalada de Frutas (Solo Fruta) 24oz", p: 20000 }, { n: "Ensalada de Frutas (Solo Fruta) 16oz", p: 14000 },
-                { n: "Fresas con Crema 24oz", p: 28000 }, { n: "Fresas con Crema 16oz", p: 18000 }, { n: "Fresas con Crema 8oz", p: 10000 },
-                { n: "Melocotones con Crema 16oz", p: 18000 },
-                { n: "Salpicón con Helado 16oz", p: 11000 }, { n: "Salpicón con Helado 12oz", p: 8500 }, { n: "Salpicón con Helado 9oz", p: 6000 }
+            { cat: "Frutas con Crema", items: [
+                { n: "Fresas con Crema 24oz", p: 34000 }, { n: "Fresas con Crema 16oz", p: 22000 }, { n: "Fresas con Crema 8oz", p: 12000 },
+                { n: "Melocotones con Crema 24oz", p: 34000 }, { n: "Melocotones con Crema 16oz", p: 22000 }, { n: "Melocotones con Crema 8oz", p: 12000 },
+                { n: "Fresas y Melocotones 24oz", p: 34000 }, { n: "Fresas y Melocotones 16oz", p: 22000 }, { n: "Fresas y Melocotones 8oz", p: 12000 }
             ]},
-            { cat: "Postres Especiales", items: [
-                { n: "Banana Split", p: 14000 },
-                { n: "Waffle Especial (Helado + Frutas)", p: 18000 },
-                { n: "Waffle Sencillo", p: 14000 },
-                { n: "Brownie Caliente con Helado", p: 14000 },
-                { n: "Mini Brownie con Helado", p: 7000 },
-                { n: "Oblea Especial", p: 6000 }, { n: "Oblea Tradicional", p: 4000 },
-                { n: "Postre Napoleón / Milo / Oreo", p: 9000 },
-                { n: "Cheesecake", p: 10000 }
+            { cat: "Salpicón y Helados", items: [
+                { n: "Salpicón con Helado 16oz", p: 14000 }, { n: "Salpicón con Helado 12oz", p: 10500 }, { n: "Salpicón con Helado 9oz", p: 7000 },
+                { n: "Banana Split", p: 17000 }, { n: "Waffle Especial", p: 22000 }, { n: "Waffle Sencillo", p: 17000 },
+                { n: "Brownie Caliente con Helado", p: 16000 }, { n: "Mini Brownie Caliente", p: 8000 },
+                { n: "Vasitos 16oz", p: 12000 }, { n: "Vasitos 12oz", p: 10000 }, { n: "Vasitos 9oz", p: 7000 }, { n: "Vasitos 5oz", p: 5000 },
+                { n: "Helado Artesanal", p: 3600 }, { n: "Paleta Kola con Leche", p: 1700 }, { n: "Paleta Agua", p: 1000 }
             ]},
-            { cat: "Helados y Bebidas", items: [
-                { n: "Vasitos de Helado 16oz", p: 10000 }, { n: "Vasitos 12oz", p: 8000 }, { n: "Vasitos 9oz", p: 6000 },
-                { n: "Helado Artesanal (1 Bola)", p: 3000 }, { n: "Paleta de Kola con Leche", p: 1500 }, { n: "Paleta de Agua", p: 1000 },
-                { n: "Malteadas (Oreo/Milo/Fresa/Café)", p: 12000 },
-                { n: "Jugos Especiales (Frutos Rojos/Verdes)", p: 10000 },
-                { n: "Jugo Natural en Leche", p: 9000 }, { n: "Jugo Natural en Agua", p: 7000 },
-                { n: "Limonadas Especiales (Coco/Cereza)", p: 10000 }
+            { cat: "Comidas Rápidas", items: [
+                { n: "Hamburguesa (Pan Artesanal + 120g Carne)", p: 22000 },
+                { n: "Salchipapa (300g Papas + 2 Salchichas)", p: 22000 },
+                { n: "Chuzo de Pollo (Chuzo + Papas + Ensalada)", p: 22000 },
+                { n: "Perros (Salchicha Zenú)", p: 14500 },
+                { n: "Perras (4 Tocinetas)", p: 15500 },
+                { n: "Sandwich (Pan Tajado + Jamón/Tocineta)", p: 12000 }
+            ]},
+            { cat: "Bebidas", items: [
+                { n: "Malteadas (Todas)", p: 13500 },
+                { n: "Jugos Especiales", p: 10000 },
+                { n: "Jugo Natural en Leche", p: 9500 }, { n: "Jugo Natural en Agua", p: 7500 },
+                { n: "Limonadas Especiales", p: 10000 }, { n: "Cerveza Heineken", p: 6000 }
             ]},
             { cat: "Pasabocas y Tortas", items: [
-                { n: "Palito de Queso", p: 2000 }, { n: "Palito Queso y Bocadillo", p: 2500 }, { n: "Palito Jamón y Queso", p: 2500 },
-                { n: "Porción Torta Chocolate / Zanahoria", p: 4000 },
-                { n: "Porción Torta Naranja / Yogurt", p: 3500 }
+                { n: "Palito de Queso", p: 2200 }, { n: "Palito Queso/Bocadillo", p: 2600 }, { n: "Palito Jamón/Queso", p: 2800 },
+                { n: "Torta Chocolate con Arequipe", p: 5500 }, { n: "Torta Zanahoria o Banano", p: 5000 }, { n: "Torta Naranja o Yogurt", p: 4500 }
             ]}
         ];
 
@@ -108,9 +100,9 @@
         function render() {
             const container = document.getElementById('menu-completo');
             container.innerHTML = menuData.map(c => `
-                <div class="mb-6">
+                <div class="mb-4">
                     <span class="category-header uppercase text-[10px] tracking-widest italic">${c.cat}</span>
-                    <div class="grid gap-2 mt-4">
+                    <div class="grid gap-2 mt-3">
                         ${c.items.map(i => `
                             <div class="bg-white p-4 rounded-2xl flex justify-between items-center shadow-sm product-card">
                                 <div class="flex-1 pr-4">
